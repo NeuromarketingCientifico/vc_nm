@@ -67,7 +67,7 @@ def procesar_imagen_colab(ruta_imagen,os,cv,np,pd,plt,io,KMeans,urlparse,YOLO,mo
     heatmap_sal = cv.applyColorMap(mapa_saliencia.astype(np.uint8), cv.COLORMAP_JET)
     combinado_yolo = cv.addWeighted(cv.cvtColor(img, cv.COLOR_BGR2RGB), 0.6, heatmap_sal, 0.4, 0)
 
-    mostrar_img("Resultado YOLO + SIFT", combinado_yolo)
+    mostrar_img("Resultado YOLO + SIFT", combinado_yolo,cv)
     # ---------- Cálculo de Área Saliente ----------
     umbral = 200
     area_saliente = int(np.sum(mapa_saliencia > umbral))
