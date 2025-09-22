@@ -14,7 +14,7 @@ def seleccionar_archivo_colab(files):
         return nombre
     return None
 
-def mostrar_img(title, img):
+def mostrar_img(title, img, cv):
     # cv usa BGR → convertir a RGB para matplotlib
     img_rgb = cv.cvtColor(img, cv.COLOR_BGR2RGB)
     plt.figure(figsize=(8, 6))
@@ -44,7 +44,7 @@ def procesar_imagen_colab(ruta_imagen,os,cv,np,pd,plt,io,KMeans,urlparse,YOLO,mo
     heatmap_color = cv.applyColorMap(heatmap.astype(np.uint8), cv.COLORMAP_JET)
     combinado_sift = cv.addWeighted(img, 0.8, heatmap_color, 0.5, 0)
 
-    mostrar_img("Resultado SIFT", combinado_sift)
+    mostrar_img("Resultado SIFT", combinado_sift,cv)
 
     # ---------- YOLO ----------
     resultados_yolo = model.predict(source=img, conf=0.5, save=False)
@@ -58,7 +58,7 @@ def procesar_imagen_colab(ruta_imagen,os,cv,np,pd,plt,io,KMeans,urlparse,YOLO,mo
             cv.putText(salida_yolo, etiqueta, (x1, y1 - 10),
                        cv.FONT_HERSHEY_SIMPLEX, 0.8, (255, 0, 0), 2)
 
-    mostrar_img("Resultado YOLO", salida_yolo)
+    mostrar_img("Resultado YOLO", salida_yolo,cv)
 
 
     gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
