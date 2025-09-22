@@ -23,7 +23,7 @@ def mostrar_img(title, img):
     plt.axis("off")
     plt.show()
 
-def procesar_imagen_colab(ruta_imagen):
+def procesar_imagen_colab(ruta_imagen,os,cv,np,pd,plt,io,KMeans,urlparse,YOLO,model):
     nombre = os.path.basename(ruta_imagen)
 
     img = cv.imread(ruta_imagen)
