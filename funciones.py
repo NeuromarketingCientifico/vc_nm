@@ -14,13 +14,6 @@ def seleccionar_archivo_colab(files):
         return nombre
     return None
 
-def seleccionar_archivo_colab():
-    uploaded = files.upload()  # abre diálogo para subir archivo local
-    if uploaded:
-        nombre = list(uploaded.keys())[0]
-        return nombre
-    return None
-
 def mostrar_img(title, img):
     # cv usa BGR → convertir a RGB para matplotlib
     img_rgb = cv.cvtColor(img, cv.COLOR_BGR2RGB)
