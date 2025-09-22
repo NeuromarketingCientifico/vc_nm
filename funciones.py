@@ -26,7 +26,7 @@ def seleccionar_archivo_colab(files):
         return nombre
     return None
 
-def mostrar_img(title, img, cv):
+def mostrar_img(title, img, cv, plt):
     # cv usa BGR → convertir a RGB para matplotlib
     img_rgb = cv.cvtColor(img, cv.COLOR_BGR2RGB)
     plt.figure(figsize=(8, 6))
@@ -56,7 +56,7 @@ def procesar_imagen_colab(ruta_imagen,os,cv,np,pd,plt,io,KMeans,urlparse,YOLO,mo
     heatmap_color = cv.applyColorMap(heatmap.astype(np.uint8), cv.COLORMAP_JET)
     combinado_sift = cv.addWeighted(img, 0.8, heatmap_color, 0.5, 0)
 
-    mostrar_img("Resultado SIFT", combinado_sift,cv)
+    mostrar_img("Resultado SIFT", combinado_sift,cv, plt)
 
     # ---------- YOLO ----------
     resultados_yolo = model.predict(source=img, conf=0.5, save=False)
@@ -70,7 +70,7 @@ def procesar_imagen_colab(ruta_imagen,os,cv,np,pd,plt,io,KMeans,urlparse,YOLO,mo
             cv.putText(salida_yolo, etiqueta, (x1, y1 - 10),
                        cv.FONT_HERSHEY_SIMPLEX, 0.8, (255, 0, 0), 2)
 
-    mostrar_img("Resultado YOLO", salida_yolo,cv)
+    mostrar_img("Resultado YOLO", salida_yolo,cv,plt)
 
 
     gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
@@ -79,7 +79,7 @@ def procesar_imagen_colab(ruta_imagen,os,cv,np,pd,plt,io,KMeans,urlparse,YOLO,mo
     heatmap_sal = cv.applyColorMap(mapa_saliencia.astype(np.uint8), cv.COLORMAP_JET)
     combinado_yolo = cv.addWeighted(cv.cvtColor(img, cv.COLOR_BGR2RGB), 0.6, heatmap_sal, 0.4, 0)
 
-    mostrar_img("Resultado YOLO + SIFT", combinado_yolo,cv)
+    mostrar_img("Resultado YOLO + SIFT", combinado_yolo, cv, plt)
     # ---------- Cálculo de Área Saliente ----------
     umbral = 200
     area_saliente = int(np.sum(mapa_saliencia > umbral))
