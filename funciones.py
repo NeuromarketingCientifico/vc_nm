@@ -7,7 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/1yuNVBh8y7ZTsScO4UqFQJYpks2OTJrlp
 """
 
-def seleccionar_archivo_colab():
+def seleccionar_archivo_colab(files):
     uploaded = files.upload()  # abre diálogo para subir archivo local
     if uploaded:
         nombre = list(uploaded.keys())[0]
